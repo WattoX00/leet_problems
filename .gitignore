@@ -1,5 +1,4 @@
 __pycache__
 .venv
-./problems
-./problem_data.json
-./data
+./leet_problems/problems
+./leet_problems/data
