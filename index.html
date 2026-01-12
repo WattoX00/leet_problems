@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body style="background-color: #000; color: #fff;">
     <div id="main">
@@ -21,7 +26,6 @@
 
             <!-- dateOfSolve problemNumber problemName  -->
 
-            <div id="solvedProblems">
                 <!--
                 <h5 id="problemNumber"></h4>
                 <span id="problemName"></span>
@@ -32,7 +36,7 @@
                 <p id="totalAccepted"></p>
                 <p id="totalSubmission"></p>
                 <p id="difficulty"></p>
-                <p id="url"></p>
+                <a id="url"></a>
                 -->
             </div>
         </div>
@@ -46,25 +50,25 @@ const problemUrl = './data/problem_data.json'
 // fetch user_data.json
     
 fetch(userUrl)
-.then(res => res.json())
-.then(data => userIntoJs(data))
+    .then(res => res.json())
+    .then(data => userIntoJs(data));
 
 // fetch problem_data.json
 
 fetch(problemUrl)
     .then(res => res.json())
-    .then(data => problemIntoJs(data))
+    .then(data => problemIntoJs(data));
 
 // user
 
 function userIntoJs(userJson) {
-    const name = userJson['name']
-    const pfp = userJson['avatar']
-    const web = userJson['website']
-    const git = userJson['giturl']
-    const total = userJson['accepted'][0]['count']
+    const name = userJson['name'];
+    const pfp = userJson['avatar'];
+    const web = userJson['website'];
+    const git = userJson['giturl'];
+    const total = userJson['accepted'][0]['count'];
     
-    userJsonDom(name, pfp, web, git, total)
+    userJsonDom(name, pfp, web, git, total);
 }
 
 function userJsonDom(name, pfp, web, git, total) {
@@ -83,26 +87,36 @@ function userJsonDom(name, pfp, web, git, total) {
 
 // problem
 
+// date
+
+
+
 function problemElements(problemName, totalAccepted, totalSubmission, difficulty, url) {
+
     const id = generateId();
-    const solvedProblems = document.getElementById('solvedProblems');
+    
+    const problems = document.getElementById('problems');
+    const solvedProblems = document.createElement('div');
+
+    problems.appendChild(solvedProblems);
+    solvedProblems.id = `solved_problem_${id}`;
+    solvedProblems.classList.add('problem_div')
 
     const span1 = document.createElement('span');
     solvedProblems.appendChild(span1);
     span1.id = `prob_${id}`;
-    span1.textContent = `${id}. `
+    span1.textContent = `${id}. `;
 
 
     const span2 = document.createElement('span');
     span1.appendChild(span2);
     span2.id = `problemName_${id}`;
     span2.textContent = `${problemName}`;
-
-
+ 
     const p1 = document.createElement('p');
     solvedProblems.appendChild(p1);
     p1.id = `totalAccepted_${id}`;
-    p1.textContent = `Total Accepted: ${totalAccepted}`    
+    p1.textContent = `Total Accepted: ${totalAccepted}`;
 
     const p2 = document.createElement('p');
     solvedProblems.appendChild(p2);
@@ -112,12 +126,22 @@ function problemElements(problemName, totalAccepted, totalSubmission, difficulty
     const p3 = document.createElement('p');
     solvedProblems.appendChild(p3);
     p3.id = `difficulty_${id}`;
-    p3.textContent = `${difficulty}` 
+    p3.textContent = `${difficulty}`;
 
     const a = document.createElement('a');
     solvedProblems.appendChild(a);
     a.id = `url_${id}`;
     a.href = `${url}`;
+
+    const vision = document.createElement('div');
+    vision.classList.add('bonus');
+    vision.classList.add('hidden');
+    vision.appendChild(p1);
+    vision.appendChild(p2);
+    vision.appendChild(p3);
+    vision.appendChild(a);
+    solvedProblems.appendChild(vision);
+
 }
 
 function problemIntoJs(data) {
@@ -127,10 +151,20 @@ function problemIntoJs(data) {
        const totalSubmission =  data[key]['stats']['totalSubmission'];
        const difficulty = data[key]['difficulty'];
        const url = data[key]['url'];
-       problemElements(problemName, totalAccepted, totalSubmission, difficulty, url) 
+       problemElements(problemName, totalAccepted, totalSubmission, difficulty, url);
     }
 }
 
+const problemDivs = document.getElementById('problems');
+
+problemDivs.addEventListener('click', (e) => {
+    const clickedElement = e.target.closest('.problem_div');
+    if (!clickedElement) return;
+    const toggleElement = clickedElement.querySelector('.bonus');
+    if (toggleElement) {
+        toggleElement.classList.toggle('hidden');
+    }
+});
 
 // id generator
 

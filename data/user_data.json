@@ -1,0 +1,53 @@
+{
+    "name": "Wattox01",
+    "avatar": "https://assets.leetcode.com/users/Wattox01/avatar_1768216527.png",
+    "realname": "Wattox01",
+    "website": [
+        "https://wattox00.github.io/"
+    ],
+    "giturl": "https://github.com/WattoX00",
+    "accepted": [
+        {
+            "difficulty": "All",
+            "count": 2,
+            "submissions": 3
+        },
+        {
+            "difficulty": "Easy",
+            "count": 1,
+            "submissions": 3
+        },
+        {
+            "difficulty": "Medium",
+            "count": 0,
+            "submissions": 0
+        },
+        {
+            "difficulty": "Hard",
+            "count": 0,
+            "submissions": 0
+        }
+    ],
+    "total": [
+        {
+            "difficulty": "All",
+            "count": 1,
+            "submissions": 4
+        },
+        {
+            "difficulty": "Easy",
+            "count": 1,
+            "submissions": 4
+        },
+        {
+            "difficulty": "Medium",
+            "count": 0,
+            "submissions": 0
+        },
+        {
+            "difficulty": "Hard",
+            "count": 0,
+            "submissions": 0
+        }
+    ]
+}
