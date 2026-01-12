@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="main">
+        <div id="userProfile">
+
+            <h3 id="userName"></h3>
+            <img src="" alt="pfp" id="userPfp">
+            <a href="" id="websiteUrl">WebsiteLogo</a>
+            <a href="" id="githubUrl">GithubLogo</a>
+            <span>Total Solved: <span id="totalSolved"></span></span>
+
+        </div>
+
+        <div id="problems">
+
+            <!-- dateOfSolve problemNumber problemName  -->
+
+            <div id="solvedProblems">
+                <!--
+                <h5 id="problemNumber"></h4>
+                <span id="problemName"></span>
+
+                HIDDEN ELEMENTS, until clicked
+                
+                <h3>stats</h3>
+                <p id="totalAccepted"></p>
+                <p id="totalSubmission"></p>
+                <p id="difficulty"></p>
+                <p id="url"></p>
+                -->
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+const userUrl = './data/user_data.json'
+const problemUrl = './data/problem_data.json'
+    
+// fetch user_data.json
+    
+fetch(userUrl)
+.then(res => res.json())
+.then(data => userIntoJs(data))
+
+
+// fetch problem_data.json
+
+fetch(problemUrl)
+    .then(res => res.json())
+    .then(data => problemIntoJs(data))
+
+function problemIntoJs(problemJson){
+    console.log(problemJson)
+}
+
+// user
+
+function userIntoJs(userJson) {
+    const name = userJson['name']
+    const pfp = userJson['avatar']
+    const web = userJson['website']
+    const git = userJson['giturl']
+    const total = userJson['accepted'][0]['count']
+    
+    userJsonDom(name, pfp, web, git, total)
+}
+
+function userJsonDom(name, pfp, web, git, total) {
+    const userName = document.getElementById('userName');
+    const userPfp = document.getElementById('userPfp');
+    const websiteUrl = document.getElementById('websiteUrl');
+    const githubUrl = document.getElementById('githubUrl');
+    const totalSolved = document.getElementById('totalSolved');
+
+    userName.textContent = name;
+    userPfp.src = pfp;
+    websiteUrl.href = web;
+    githubUrl.href = git;
+    totalSolved.textContent = total;
+}
+
+// problem
+
+function problemIntoJs() {
+
+}
+
+function problemElements() {
+    const id = generateId();
+    const main = document.getElementById('solvedProblems');
+
+    const h5 = main.document.createElement('h5');
+    h5.id = `name_${id}`;
+
+    const span = main.document.createElement('span');
+    span.id = `problemName_${id}`;
+
+    const p1 = main.document.createElement('p');
+    p1.id = `totalAccepted_${id}`;
+    
+    const p2 = main.document.createElement('p');
+    p2.id = `totalSubmission_${id}`;
+    
+    const p3 = main.document.createElement('p');
+    p3.id = `difficulty_${id}`;
+
+    const p4 = main.document.createElement('p');
+    p4.id = `url_${id}`;
+}
+
+const generateId = (() => {
+    let id = 1;
+    return () => id++
+})();
+
+/*
+const pyton = './problems/1.py'
+
+fetch(pyton)
+    .then(res => res.text())
+    .then(data => console.log(data))
+*/
+</script>
+</html>
