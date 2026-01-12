@@ -4,7 +4,7 @@ import requests
 app = FastAPI()
 
 problemUrl = 'https://leetcode-api-pied.vercel.app/problem/'
-userUrl = 'https://leetcode-api-pied.vercel.app/user/' # userName comes here
+userUrl = 'https://leetcode-api-pied.vercel.app/user/wattox01' # userName comes here
 
 @app.get('/user')
 def getUserJson():

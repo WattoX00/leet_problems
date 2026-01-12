@@ -2,15 +2,6 @@ from app import getUserJson, getProblemById
 import json
 from pathlib import Path
 
-
-# running !!!
-
-#makeUserData()
-
-#syncProblemData()
-
-
-
 # user_data.json
 
 def makeUserData():
@@ -38,7 +29,7 @@ def makeUserData():
     writeUserDataJson(userDataJson)
 
 def writeUserDataJson(data):
-    with open('./data/user_data.json', 'w') as f:
+    with open('leet_problems/data/user_data.json', 'w') as f:
         return json.dump(data, f, indent=4)
 
 # problem_data.json
@@ -48,7 +39,7 @@ def problm(id):
     problemJson = getProblemById(id) #json
 
     title = problemJson['title']
-    stats = problemJson['stats']
+    stats = json.loads(problemJson['stats'])
     difficulty = problemJson['difficulty']
     url = problemJson['url']
 
@@ -60,22 +51,29 @@ def problm(id):
     }
 
     data = openProblemDataJson()
-    data['problems'][id] = problemDataJson
+    data[id] = problemDataJson
     
     writeProblemDataJson(data)
 
 def openProblemDataJson():
-    with open('./data/problem_data.json', 'r') as f:
+    with open('leet_problems/data/problem_data.json', 'r') as f:
         return json.load(f)
 
 def writeProblemDataJson(data):
-    with open('./problem_data.json', 'w') as f:
+    with open('leet_problems/data/problem_data.json', 'w') as f:
         return json.dump(data, f, indent=4)
 
 def syncProblemData():
     data = openProblemDataJson()
 
-    for file in Path('./problems').iterdir():
+    for file in Path('leet_problems/problems').iterdir():
 
-        if file.stem not in data['problems']:
+        if file.stem not in data:
             problm(file.stem)
+
+
+# running !!!
+
+# makeUserData()
+
+# syncProblemData()

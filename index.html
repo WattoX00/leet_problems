@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+<body style="background-color: #000; color: #fff;">
     <div id="main">
         <div id="userProfile">
 
@@ -49,16 +49,11 @@ fetch(userUrl)
 .then(res => res.json())
 .then(data => userIntoJs(data))
 
-
 // fetch problem_data.json
 
 fetch(problemUrl)
     .then(res => res.json())
     .then(data => problemIntoJs(data))
-
-function problemIntoJs(problemJson){
-    console.log(problemJson)
-}
 
 // user
 
@@ -88,32 +83,56 @@ function userJsonDom(name, pfp, web, git, total) {
 
 // problem
 
-function problemIntoJs() {
-
-}
-
-function problemElements() {
+function problemElements(problemName, totalAccepted, totalSubmission, difficulty, url) {
     const id = generateId();
-    const main = document.getElementById('solvedProblems');
+    const solvedProblems = document.getElementById('solvedProblems');
 
-    const h5 = main.document.createElement('h5');
-    h5.id = `name_${id}`;
+    const span1 = document.createElement('span');
+    solvedProblems.appendChild(span1);
+    span1.id = `prob_${id}`;
+    span1.textContent = `${id}. `
 
-    const span = main.document.createElement('span');
-    span.id = `problemName_${id}`;
 
-    const p1 = main.document.createElement('p');
+    const span2 = document.createElement('span');
+    span1.appendChild(span2);
+    span2.id = `problemName_${id}`;
+    span2.textContent = `${problemName}`;
+
+
+    const p1 = document.createElement('p');
+    solvedProblems.appendChild(p1);
     p1.id = `totalAccepted_${id}`;
-    
-    const p2 = main.document.createElement('p');
-    p2.id = `totalSubmission_${id}`;
-    
-    const p3 = main.document.createElement('p');
-    p3.id = `difficulty_${id}`;
+    p1.textContent = `Total Accepted: ${totalAccepted}`    
 
-    const p4 = main.document.createElement('p');
-    p4.id = `url_${id}`;
+    const p2 = document.createElement('p');
+    solvedProblems.appendChild(p2);
+    p2.id = `totalSubmission_${id}`;
+    p2.textContent = `Total Submissions: ${totalSubmission}`;
+    
+    const p3 = document.createElement('p');
+    solvedProblems.appendChild(p3);
+    p3.id = `difficulty_${id}`;
+    p3.textContent = `${difficulty}` 
+
+    const a = document.createElement('a');
+    solvedProblems.appendChild(a);
+    a.id = `url_${id}`;
+    a.href = `${url}`;
 }
+
+function problemIntoJs(data) {
+    for (key in data){
+       const problemName = data[key]['title'];
+       const totalAccepted = data[key]['stats']['totalAccepted'];
+       const totalSubmission =  data[key]['stats']['totalSubmission'];
+       const difficulty = data[key]['difficulty'];
+       const url = data[key]['url'];
+       problemElements(problemName, totalAccepted, totalSubmission, difficulty, url) 
+    }
+}
+
+
+// id generator
 
 const generateId = (() => {
     let id = 1;
