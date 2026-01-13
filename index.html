@@ -8,9 +8,13 @@
         .hidden {
             display: none;
         }
+        .popup {
+            display: hidden;
+        }
     </style>
 </head>
 <body style="background-color: #000; color: #fff;">
+    <div id="popup" class="popup"><pre id="popupText"></pre></div>
     <div id="main">
         <div id="userProfile">
 
@@ -22,23 +26,8 @@
 
         </div>
 
-        <div id="problems">
-
-            <!-- dateOfSolve problemNumber problemName  -->
-
-                <!--
-                <h5 id="problemNumber"></h4>
-                <span id="problemName"></span>
-
-                HIDDEN ELEMENTS, until clicked
-                
-                <h3>stats</h3>
-                <p id="totalAccepted"></p>
-                <p id="totalSubmission"></p>
-                <p id="difficulty"></p>
-                <a id="url"></a>
-                -->
-            </div>
+        <div id="problems"></div>
+        
         </div>
     </div>
 </body>
@@ -87,10 +76,6 @@ function userJsonDom(name, pfp, web, git, total) {
 
 // problem
 
-// date
-
-
-
 function problemElements(problemName, totalAccepted, totalSubmission, difficulty, url) {
 
     const id = generateId();
@@ -133,6 +118,17 @@ function problemElements(problemName, totalAccepted, totalSubmission, difficulty
     a.id = `url_${id}`;
     a.href = `${url}`;
 
+    const python_fetch = document.createElement('button');
+    python_fetch.id = `btn_${id}`;
+    python_fetch.classList.add('btnF');
+    python_fetch.textContent = `Show problem and solution`;
+    
+    python_fetch.addEventListener('click', (e) => {
+        e.stopPropagation();
+        fetchPython(id);
+    })
+
+
     const vision = document.createElement('div');
     vision.classList.add('bonus');
     vision.classList.add('hidden');
@@ -140,6 +136,7 @@ function problemElements(problemName, totalAccepted, totalSubmission, difficulty
     vision.appendChild(p2);
     vision.appendChild(p3);
     vision.appendChild(a);
+    vision.appendChild(python_fetch);
     solvedProblems.appendChild(vision);
 
 }
@@ -159,6 +156,7 @@ const problemDivs = document.getElementById('problems');
 
 problemDivs.addEventListener('click', (e) => {
     const clickedElement = e.target.closest('.problem_div');
+    if (e.target.closest('.btnF')) return;
     if (!clickedElement) return;
     const toggleElement = clickedElement.querySelector('.bonus');
     if (toggleElement) {
@@ -173,12 +171,25 @@ const generateId = (() => {
     return () => id++
 })();
 
-/*
-const pyton = './problems/1.py'
+let cache = {}
+async function fetchPython(id) {
+    if (id in cache) return showPyhton(cache[id]);
+    
+    const pyton = `./problems/${id}.py`
+    const res = await fetch(pyton)
+    const data = await res.text()
 
-fetch(pyton)
-    .then(res => res.text())
-    .then(data => console.log(data))
-*/
+    cache[id] = data
+
+    showPyhton(data)
+}
+
+function showPyhton(data) {
+    const popup = document.getElementById('popup');
+    const popupText = document.getElementById('popupText');
+    popupText.textContent = data;
+    popup.classList.toggle('popup');
+}
+
 </script>
 </html>
