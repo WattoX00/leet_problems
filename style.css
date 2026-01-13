@@ -1,0 +1,61 @@
+.hidden {
+    display: none;
+}
+
+.popup_toggle {
+    display: none !important;
+}
+
+#popup {
+    width: 600px;
+    height: 600px;
+    background-color: #333;
+    color: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+#popup pre {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    margin: 0;
+}
+
+
+#closePopup {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
+#userProfile {
+    width: 200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}
+
+#userProfile img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+#problems {
+    position: fixed;
+    left: 320px;
+    width: 500px;
+}
