@@ -57,7 +57,6 @@ function problemElements(problemName, totalAccepted, totalSubmission, difficulty
     span1.id = `prob_${id}`;
     span1.textContent = `${id}. `;
 
-
     const span2 = document.createElement('span');
     span1.appendChild(span2);
     span2.id = `problemName_${id}`;
@@ -92,7 +91,6 @@ function problemElements(problemName, totalAccepted, totalSubmission, difficulty
         e.stopPropagation();
         fetchPython(id);
     })
-
 
     const vision = document.createElement('div');
     vision.classList.add('bonus');
