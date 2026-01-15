@@ -79,7 +79,6 @@
     top: 20px;
     left: 20px;
     bottom: 20px;
-    background-color: #1e1e1e;
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.5);
@@ -88,6 +87,8 @@
     align-items: center;
     gap: 15px;
     transition: all 0.3s ease;
+    background: linear-gradient(180deg, #1f1f1f, #141414);
+    border: 1px solid #2a2a2a;
 }
 
 #userProfile h3 {
@@ -95,6 +96,7 @@
     font-size: 20px;
     text-align: center;
     color: #e0e0e0;
+    letter-spacing: 0.5px;
 }
 
 #userProfile img {
@@ -103,17 +105,25 @@
     height: 120px;
     object-fit: cover;
     border: 2px solid #444;
+    box-shadow: 0 0 0 3px #2a2a2a, 0 8px 20px rgba(0,0,0,0.6);
 }
 
 #userProfile a {
     text-decoration: none;
-    color: #1a73e8;
     font-weight: 500;
     margin: 2px 0;
+    color: #4ea1ff;
+    transition: color 0.2s ease;
 }
+
+#userProfile a:hover {
+    color: #78b7ff;
+}
+
 #userProfile span {
     font-size: 14px;
     color: #bbb;
+    opacity: 0.9;
 }
 
 #problems {
@@ -130,8 +140,7 @@
 .problem_div {
     max-width: 400px;
     min-width: 50px;
-    min-height: 120px;
-    background-color: #1e1e1e;
+    min-height: 90px;
     border-radius: 12px;
     margin-bottom: 15px;
     padding: 20px;
@@ -140,6 +149,9 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    background: linear-gradient(160deg, #1e1e1e, #171717);
+    border: 1px solid #2b2b2b;
+    position: relative;
 }
 
 .problem_div:hover {
@@ -149,15 +161,23 @@
 
 .problem_div span {
     font-weight: 600;
-    font-size: 16px;
     color: #fff;
+    font-size: 17px;
+    letter-spacing: 0.3px;
 }
 
 .problem_div p {
     margin: 5px 0;
     font-size: 14px;
-    color: #ccc;
+    line-height: 1.5;
+    color: #bdbdbd;
 }
+
+.problem_div.active {
+    border-color: #4ea1ff;
+    box-shadow: 0 10px 25px rgba(78,161,255,0.25);
+}
+
 .bonus {
     max-width: 500px;
     height: 150px;
@@ -167,6 +187,7 @@
         #userProfile {
         position: relative;
         width: 85%;
+        margin: auto;
         height: auto;
         top: 0;
         left: 0;
@@ -201,6 +222,7 @@
 
     .problem_div {
         max-width: 80%;
+        margin: auto;
     }
     #popup {
         width: 95vw;
