@@ -1,7 +1,9 @@
 const userUrl = './data/user_data.json';
 const problemUrl = './data/problem_data.json';
-
 const problemFiles = 'https://api.github.com/repos/WattoX00/leet_problems/contents/problems';
+
+// fetch file names from github (problems)
+
 solutionFiles(problemFiles);
 
 // fetch user_data.json
@@ -145,7 +147,6 @@ function ids(githubFiles) {
         const fileName = file.name.replace(/\.py$/, "");
         solvedFiles.push(fileName);
     });
-    console.log(solvedFiles);
 }
 
 function generateId() {
@@ -177,6 +178,3 @@ const closePopup = document.getElementById('closePopup');
 closePopup.addEventListener('click', (e) => {
     popup.classList.toggle('popup_toggle');
 });
-
-
-
