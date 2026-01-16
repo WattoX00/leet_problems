@@ -1,6 +1,9 @@
 const userUrl = './data/user_data.json';
 const problemUrl = './data/problem_data.json';
 
+const problemFiles = 'https://api.github.com/repos/WattoX00/leet_problems/contents/problems';
+solutionFiles(problemFiles);
+
 // fetch user_data.json
     
 fetch(userUrl)
@@ -139,19 +142,15 @@ async function solutionFiles(problemFiles) {
 
 function ids(githubFiles) {
     githubFiles.forEach(file => {
-        const fileName = file.name.replace(/\.py$/, ""); // remove extension
+        const fileName = file.name.replace(/\.py$/, "");
         solvedFiles.push(fileName);
     });
     console.log(solvedFiles);
 }
 
 function generateId() {
-    return solvedFiles.shift(); // gives the first ID and removes it from array
+    return solvedFiles.shift();
 }
-
-const problemFiles = 'https://api.github.com/repos/WattoX00/leet_problems/contents/problems';
-solutionFiles(problemFiles);
-
 
 let cache = {};
 async function fetchPython(id) {
