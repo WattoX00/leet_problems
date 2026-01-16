@@ -1,6 +1,6 @@
 const userUrl = './data/user_data.json';
 const problemUrl = './data/problem_data.json';
-    
+
 // fetch user_data.json
     
 fetch(userUrl)
@@ -129,10 +129,29 @@ problemDivs.addEventListener('click', (e) => {
 
 // id generator
 
-const generateId = (() => {
-    let id = 1;
-    return () => id++
-})();
+const solvedFiles = [];
+
+async function solutionFiles(problemFiles) {
+    const res = await fetch(problemFiles);
+    const data = await res.json();
+    ids(data);
+}
+
+function ids(githubFiles) {
+    githubFiles.forEach(file => {
+        const fileName = file.name.replace(/\.py$/, ""); // remove extension
+        solvedFiles.push(fileName);
+    });
+    console.log(solvedFiles);
+}
+
+function generateId() {
+    return solvedFiles.shift(); // gives the first ID and removes it from array
+}
+
+const problemFiles = 'https://api.github.com/repos/WattoX00/leet_problems/contents/problems';
+solutionFiles(problemFiles);
+
 
 let cache = {};
 async function fetchPython(id) {
@@ -159,3 +178,6 @@ const closePopup = document.getElementById('closePopup');
 closePopup.addEventListener('click', (e) => {
     popup.classList.toggle('popup_toggle');
 });
+
+
+

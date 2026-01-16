@@ -29,7 +29,7 @@ def makeUserData():
     writeUserDataJson(userDataJson)
 
 def writeUserDataJson(data):
-    with open('leet_problems/data/user_data.json', 'w') as f:
+    with open('data/user_data.json', 'w') as f:
         return json.dump(data, f, indent=4)
 
 # problem_data.json
@@ -56,17 +56,17 @@ def problm(id):
     writeProblemDataJson(data)
 
 def openProblemDataJson():
-    with open('leet_problems/data/problem_data.json', 'r') as f:
+    with open('data/problem_data.json', 'r') as f:
         return json.load(f)
 
 def writeProblemDataJson(data):
-    with open('leet_problems/data/problem_data.json', 'w') as f:
+    with open('data/problem_data.json', 'w') as f:
         return json.dump(data, f, indent=4)
 
 def syncProblemData():
     data = openProblemDataJson()
 
-    for file in Path('leet_problems/problems').iterdir():
+    for file in Path('problems').iterdir():
 
         if file.stem not in data:
             problm(file.stem)
