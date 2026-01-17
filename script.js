@@ -46,9 +46,9 @@ function userJsonDom(name, pfp, web, git, total) {
 
 // problem
 
-function problemElements(problemName, totalAccepted, totalSubmission, difficulty, url) {
+async function problemElements(problemName, totalAccepted, totalSubmission, difficulty, url) {
 
-    const id = generateId();
+    const id = await generateId();
     
     const problems = document.getElementById('problems');
     const solvedProblems = document.createElement('div');
@@ -90,7 +90,7 @@ function problemElements(problemName, totalAccepted, totalSubmission, difficulty
     const python_fetch = document.createElement('button');
     python_fetch.id = `btn_${id}`;
     python_fetch.classList.add('btnF');
-    python_fetch.textContent = `Show problem and solution`;
+    python_fetch.textContent = `Show problem`;
     
     python_fetch.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -154,10 +154,11 @@ function generateId() {
 }
 
 let cache = {};
+
 async function fetchPython(id) {
     if (id in cache) return showPyhton(cache[id]);
     
-    const pyton = `./problems/${id}.py`;
+    const pyton = `https://raw.githubusercontent.com/WattoX00/leet_problems/refs/heads/main/problems/${id}.py`;
     const res = await fetch(pyton);
     const data = await res.text();
 
