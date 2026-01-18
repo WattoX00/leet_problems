@@ -1,5 +1,5 @@
-const userUrl = './data/user_data.json';
-const problemUrl = './data/problem_data.json';
+const userUrl = 'https://api.github.com/repos/WattoX00/leet_problems/contents/data/user_data.json';
+const problemUrl = 'https://api.github.com/repos/WattoX00/leet_problems/contents/data/problem_data.json';
 const problemFiles = 'https://api.github.com/repos/WattoX00/leet_problems/contents/problems';
 
 // fetch file names from github (problems)

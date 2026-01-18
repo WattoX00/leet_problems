@@ -1,0 +1,26 @@
+{
+    "1": {
+        "title": "Two Sum",
+        "stats": {
+            "totalAccepted": "20.2M",
+            "totalSubmission": "35.5M",
+            "totalAcceptedRaw": 20181130,
+            "totalSubmissionRaw": 35515912,
+            "acRate": "56.8%"
+        },
+        "difficulty": "Easy",
+        "url": "https://leetcode.com/problems/two-sum/"
+    },
+    "4": {
+        "title": "Median of Two Sorted Arrays",
+        "stats": {
+            "totalAccepted": "4M",
+            "totalSubmission": "8.7M",
+            "totalAcceptedRaw": 3973230,
+            "totalSubmissionRaw": 8711784,
+            "acRate": "45.6%"
+        },
+        "difficulty": "Hard",
+        "url": "https://leetcode.com/problems/median-of-two-sorted-arrays/"
+    }
+}
